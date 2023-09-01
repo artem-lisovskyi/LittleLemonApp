@@ -31,7 +31,7 @@ fun OnboardingScreen() {
             contentDescription = "Logo image",
             alignment = Alignment.Center,
             modifier = Modifier
-                .size(200.dp, 60.dp)
+                .size(200.dp, 65.dp)
         )
         Text(
             text = "Let's get to know you",
