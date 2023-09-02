@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.littlelemon.littlelemonapp
 
 import androidx.compose.foundation.Image
@@ -74,56 +76,9 @@ fun OnboardingScreen() {
                 .padding(start = 16.dp, bottom = 24.dp, top = 48.dp)
         )
         Column {
-            Text(
-                text = "First name",
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            TextField(
-                value = firstName,
-                onValueChange = { newText -> firstName = newText },
-                textStyle = TextStyle(fontSize = 12.sp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
-                    .height(50.dp)
-            )
-
-
-            Text(
-                text = "Second name",
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            TextField(
-                value = secondName,
-                onValueChange = { newText -> secondName = newText },
-                textStyle = TextStyle(fontSize = 12.sp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
-                    .height(50.dp)
-            )
-            Text(
-                text = "Email",
-                fontSize = 16.sp,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            )
-            TextField(
-                value = email,
-                onValueChange = { newText -> email = newText},
-                textStyle = TextStyle(fontSize = 12.sp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
-                    .height(50.dp)
-            )
+            EnterField(fieldName = "First name", defaultFieldValue = "Will")
+            EnterField(fieldName = "Second name", defaultFieldValue = "Smith")
+            EnterField(fieldName = "Email", defaultFieldValue = "will.smith@example.com")
 
         }
         
@@ -138,6 +93,29 @@ fun OnboardingScreen() {
                 color = Color.Black)
         }
     }
+}
+
+@Composable
+fun EnterField(fieldName:String, defaultFieldValue: String){
+    var fieldValue by remember {
+        mutableStateOf(defaultFieldValue)
+    }
+    Text(
+        text = fieldName,
+        fontSize = 16.sp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+    )
+    TextField(
+        value = fieldValue,
+        onValueChange = { newText -> fieldValue = newText },
+        textStyle = TextStyle(fontSize = 12.sp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
+            .height(50.dp)
+    )
 }
 
 @Preview
