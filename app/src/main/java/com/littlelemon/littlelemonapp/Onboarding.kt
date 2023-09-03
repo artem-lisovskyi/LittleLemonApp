@@ -2,6 +2,8 @@
 
 package com.littlelemon.littlelemonapp
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -27,15 +29,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.littlelemon.littlelemonapp.ui.theme.Green
+import com.littlelemon.littlelemonapp.ui.theme.Red
 import com.littlelemon.littlelemonapp.ui.theme.Yellow
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(navController: NavHostController, context:Context) {
+    val sharedPreferences = context.getSharedPreferences("UserProfiles", Context.MODE_PRIVATE)
+
     var firstName by remember {
         mutableStateOf("First name")
     }
@@ -44,6 +48,9 @@ fun OnboardingScreen() {
     }
     var email by remember {
         mutableStateOf("Email")
+    }
+    var error by remember {
+        mutableStateOf("")
     }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -75,51 +82,90 @@ fun OnboardingScreen() {
                 .fillMaxWidth()
                 .padding(start = 16.dp, bottom = 24.dp, top = 48.dp)
         )
+        Text(
+            text = error,
+            fontSize = 12.sp,
+            color = Red,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 8.dp))
         Column {
-            EnterField(fieldName = "First name", defaultFieldValue = "Will")
-            EnterField(fieldName = "Second name", defaultFieldValue = "Smith")
-            EnterField(fieldName = "Email", defaultFieldValue = "will.smith@example.com")
-
+            Text(
+                text = "First name",
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+            TextField(
+                value = firstName,
+                onValueChange = { newText -> firstName = newText },
+                textStyle = TextStyle(fontSize = 12.sp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
+                    .height(50.dp)
+            )
+            Text(
+                text = "Second name",
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+            TextField(
+                value = secondName,
+                onValueChange = { newText -> secondName = newText },
+                textStyle = TextStyle(fontSize = 12.sp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
+                    .height(50.dp)
+            )
+            Text(
+                text = "Email",
+                fontSize = 16.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            )
+            TextField(
+                value = email,
+                onValueChange = { newText -> email = newText },
+                textStyle = TextStyle(fontSize = 12.sp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
+                    .height(50.dp)
+            )
         }
-        
+
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                if (firstName.isBlank() || secondName.isBlank() || email.isBlank()) {
+                    error = "Registration unsuccessful. Please enter all data."
+                } else {
+                    error = ""
+                    sharedPreferences
+                        .edit()
+                        .putString("First name", firstName)
+                        .putString("Second name", secondName)
+                        .putString("Email", email)
+                        .apply()
+                    Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                    navController.navigate(Home.route)
+                }
+            },
             colors = ButtonDefaults.buttonColors(Yellow),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(text = "Register",
-                color = Color.Black)
+            Text(
+                text = "Register",
+                color = Color.Black
+            )
         }
-    }
-}
 
-@Composable
-fun EnterField(fieldName:String, defaultFieldValue: String){
-    var fieldValue by remember {
-        mutableStateOf(defaultFieldValue)
     }
-    Text(
-        text = fieldName,
-        fontSize = 16.sp,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-    )
-    TextField(
-        value = fieldValue,
-        onValueChange = { newText -> fieldValue = newText },
-        textStyle = TextStyle(fontSize = 12.sp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
-            .height(50.dp)
-    )
-}
-
-@Preview
-@Composable
-fun OnboardingScreenPreview() {
-    OnboardingScreen()
 }
