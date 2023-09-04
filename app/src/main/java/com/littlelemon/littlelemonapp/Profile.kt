@@ -36,6 +36,7 @@ fun ProfileScreen(context: Context, navController: NavHostController) {
             alignment = Alignment.Center,
             modifier = Modifier
                 .size(200.dp, 65.dp)
+
         )
         Column {
 
