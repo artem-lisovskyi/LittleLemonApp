@@ -2,6 +2,7 @@ package com.littlelemon.littlelemonapp
 
 import android.content.Context
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,6 +37,7 @@ fun ProfileScreen(context: Context, navController: NavHostController) {
             alignment = Alignment.Center,
             modifier = Modifier
                 .size(200.dp, 65.dp)
+                .clickable { navController.navigate(Home.route) }
 
         )
         Column {
