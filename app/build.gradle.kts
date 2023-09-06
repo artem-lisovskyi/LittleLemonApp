@@ -1,10 +1,8 @@
 plugins {
-    id ("org.jetbrains.kotlin.plugin.serialization") version "1.7.20" apply false
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
-
-
+    id("kotlin-kapt")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -68,6 +66,9 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:2.1.3")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
     implementation("androidx.room:room-runtime:2.5.2")
+    implementation("com.github.bumptech.glide:compose:1.0.0-alpha.5")
+    val compose_version = "1.5.0"
+    implementation("androidx.compose.runtime:runtime-livedata:$compose_version")
     kapt("androidx.room:room-compiler:2.5.2")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

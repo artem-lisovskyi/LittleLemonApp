@@ -1,18 +1,22 @@
 package com.littlelemon.littlelemonapp
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 @Composable
-fun Navigation(navController: NavHostController, context: Context) {
-    val x = 2
+fun Navigation(
+    navController: NavHostController,
+    context: Context,
+    databaseItems: State<List<MenuItemRoom>>
+) {
+    val sharedPreferences = context.getSharedPreferences("UserProfiles", Context.MODE_PRIVATE)
     NavHost(
         navController = navController,
-        startDestination = if (true) {
+        startDestination = if (sharedPreferences.all.isEmpty()) {
             Onboarding.route
         } else {
             Home.route
@@ -22,7 +26,7 @@ fun Navigation(navController: NavHostController, context: Context) {
             OnboardingScreen(navController, context)
         }
         composable(Home.route) {
-            HomeScreen(navController)
+            HomeScreen(navController, databaseItems)
         }
         composable(Profile.route) {
             ProfileScreen(context, navController)

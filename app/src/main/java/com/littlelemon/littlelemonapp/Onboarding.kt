@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -32,22 +33,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.bumptech.glide.integration.compose.placeholder
 import com.littlelemon.littlelemonapp.ui.theme.Green
 import com.littlelemon.littlelemonapp.ui.theme.Red
 import com.littlelemon.littlelemonapp.ui.theme.Yellow
 
 @Composable
-fun OnboardingScreen(navController: NavHostController, context:Context) {
+fun OnboardingScreen(navController: NavHostController, context: Context) {
     val sharedPreferences = context.getSharedPreferences("UserProfiles", Context.MODE_PRIVATE)
 
     var firstName by remember {
-        mutableStateOf("First name")
+        mutableStateOf("")
     }
     var secondName by remember {
-        mutableStateOf("Second name")
+        mutableStateOf("")
     }
     var email by remember {
-        mutableStateOf("Email")
+        mutableStateOf("")
     }
     var error by remember {
         mutableStateOf("")
@@ -88,7 +90,8 @@ fun OnboardingScreen(navController: NavHostController, context:Context) {
             color = Red,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 8.dp))
+                .padding(start = 16.dp, end = 8.dp)
+        )
         Column {
             Text(
                 text = "First name",
@@ -97,10 +100,11 @@ fun OnboardingScreen(navController: NavHostController, context:Context) {
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            TextField(
+            OutlinedTextField(
                 value = firstName,
                 onValueChange = { newText -> firstName = newText },
-                textStyle = TextStyle(fontSize = 12.sp),
+                placeholder = { Text(text = "First name") },
+                textStyle = TextStyle(fontSize = 12.sp, color = Color.Black),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
@@ -113,10 +117,11 @@ fun OnboardingScreen(navController: NavHostController, context:Context) {
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            TextField(
+            OutlinedTextField(
                 value = secondName,
                 onValueChange = { newText -> secondName = newText },
-                textStyle = TextStyle(fontSize = 12.sp),
+                textStyle = TextStyle(fontSize = 12.sp, color = Color.Black),
+                placeholder = { Text(text = "Second name") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
@@ -129,10 +134,11 @@ fun OnboardingScreen(navController: NavHostController, context:Context) {
                     .fillMaxWidth()
                     .padding(16.dp)
             )
-            TextField(
+            OutlinedTextField(
                 value = email,
                 onValueChange = { newText -> email = newText },
-                textStyle = TextStyle(fontSize = 12.sp),
+                textStyle = TextStyle(fontSize = 12.sp, color = Color.Black),
+                placeholder = { Text(text = "Email") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, bottom = 24.dp)
