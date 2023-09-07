@@ -2,13 +2,11 @@ package com.littlelemon.littlelemonapp
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -42,7 +40,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -58,9 +55,9 @@ fun HomeScreen(navController: NavHostController, databaseItems: State<List<MenuI
     var index by remember {
         mutableIntStateOf(0)
     }
-    var menuItem = databaseItems.value
+    val menuItem = databaseItems.value
     var chooseCategory by remember {
-        mutableStateOf(0)
+        mutableIntStateOf(0)
     }
     var menuItems = when (chooseCategory) {
         0 -> menuItem
@@ -299,42 +296,3 @@ private fun MenuItemsList(items: List<MenuItemRoom>) {
         )
     }
 }
-
-
-
-@Composable
-fun TextSizeBorderButton(text: String) {
-    Button(
-        onClick = { /* Действие при нажатии */ },
-        modifier = Modifier
-            .padding(4.dp) // Отступ кнопки
-            .background(Color.Gray) // Цвет фона
-            .border(1.dp, Color.Black) // Границы
-    ) {
-        Text(
-            text = text,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
-    }
-}
-
-@Composable
-fun TextSizeBorderButtonDemo() {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        TextSizeBorderButton("Кнопка 1")
-        TextSizeBorderButton("Другая кнопка")
-        TextSizeBorderButton("Еще одна кнопка")
-    }
-}
-
-@Preview
-@Composable
-fun PreviewTextSizeBorderButton() {
-    TextSizeBorderButtonDemo()
-}
-

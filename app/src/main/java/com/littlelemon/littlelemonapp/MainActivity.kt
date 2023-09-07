@@ -9,7 +9,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
-import androidx.room.Database
 import androidx.room.Room
 import com.littlelemon.littlelemonapp.ui.theme.LittleLemonAppTheme
 import io.ktor.client.HttpClient

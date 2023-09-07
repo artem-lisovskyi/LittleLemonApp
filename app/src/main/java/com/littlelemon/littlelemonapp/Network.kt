@@ -1,10 +1,7 @@
 package com.littlelemon.littlelemonapp
 
-import androidx.lifecycle.LiveData
-import androidx.room.Room
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.net.URL
 
 @Serializable
 data class MenuNetworkData(
