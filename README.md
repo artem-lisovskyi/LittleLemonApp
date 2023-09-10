@@ -19,7 +19,7 @@ Little Lemon is app for ordering food.It was created in Kotlin.
 
 # Screenshots
 
-![image](https://github.com/artem-lisovskyi/LittleLemonApp/assets/123304314/b44ad45e-f760-4ee3-ac13-8b9de1118840) ![image](https://github.com/artem-lisovskyi/LittleLemonApp/assets/123304314/981b4eb5-cc22-4780-89b7-b56f54ef76d4) ![image](https://github.com/artem-lisovskyi/LittleLemonApp/assets/123304314/0fa97c9c-56fa-452b-bf03-d3ff543645c9)
-
-
+<img src="images/onboarding-screen.png" alt="drawing" width="250"/>
+<img src="images/home-screen.png" alt="drawing" width="250"/>
+<img src="images/profile-screen.png" alt="drawing" width="250"/>
 
